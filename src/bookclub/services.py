@@ -118,8 +118,9 @@ def search_books(db: Session, query: str) -> list[Book]:
     ).all()
 
     results = title_matches + author_matches + description_matches
-    return results
+    unique_results = {book.id: book for book in results}
 
+    return list(unique_results.values())
 
 # ---------------------------------------------------------------------------
 # Review operations
