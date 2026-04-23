@@ -106,7 +106,7 @@ class RateLimiter:
             if len(parts) == 2 and parts[1].startswith("token-"):
                 client_id = parts[1]
 
-        bucket = self._buckets[client_id]
+        bucket = self._get_or_create_bucket(client_id)
         bucket["count"] += 1
 
         if bucket["count"] > self.max_requests:
